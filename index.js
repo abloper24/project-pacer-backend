@@ -1,22 +1,23 @@
-// const express = require('express');
-// const app = express();
-// const cors = require('cors'); 
-// const PORT = 8080;
+const express = require('express');
+const app = express();
+require("dotenv").config();
+const cors = require('cors');
 
-// const videosRoutes = require('./routes/videos') 
+const PORT = process.env.PORT || 8080;
 
-// app.use(cors()); 
-// app.use(express.json()); 
-// app.use('/videos', videosRoutes) 
+// import all routes here
+const clientsRoutes = require('./routes/clients-routes');
+const timersRoutes = require('./routes/timers-routes');
 
-// app.use((req, res, next)=>{
-//     console.log('Incoming Request!')
-//     console.log(req.method)
-//     next();
-// });
+//make sure to include cors
+app.use(express.json());
+app.use(cors()); 
 
-// app.use(express.static('public'));
 
-// app.listen(PORT, () => {
-//     console.log(`We are live on port ${PORT}`)
-// })
+// all routes should go here
+app.use("/clients", clientsRoutes);
+app.use("/timers", timersRoutes);
+
+app.listen(PORT, () => {
+  console.log(`We are live on port http://localhost:${PORT}`);
+});
