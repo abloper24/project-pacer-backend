@@ -3,13 +3,13 @@ const timerController = require("../controllers/timers-controller");
 
 // get all timers
 router.route("/")
-  .get(timerController.index)
-  .post(timerController.add);
+  .get(timerController.index) //checked
+  .post(timerController.add); //checked added id 10 and 11
 
 // timer by ID
 router.route("/:id")
-  .get(timerController.findOne)
-  .patch(timerController.update)
-  .delete(timerController.remove);
+  .get(timerController.findOne) //checked
+  .patch(timerController.update) //checked fixed timerid 9 
+  .delete(timerController.remove); //checked deleted timerid11
 
 module.exports = router;

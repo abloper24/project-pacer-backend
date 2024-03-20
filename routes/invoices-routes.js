@@ -2,12 +2,12 @@ const router = require("express").Router();
 const invoiceController = require("../controllers/invoices-controller"); 
 
 router.route("/")
-  .get(invoiceController.index)
-  .post(invoiceController.add);
+  .get(invoiceController.index) //checked
+  .post(invoiceController.add); //checked
 
 router.route("/:id")
-  .get(invoiceController.findOne)
-  .patch(invoiceController.update)
-  .delete(invoiceController.remove);
+  .get(invoiceController.findOne) //checked
+  .patch(invoiceController.update) //checked
+  .delete(invoiceController.remove); //checked
 
 module.exports = router;
