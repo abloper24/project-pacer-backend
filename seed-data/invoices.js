@@ -1,6 +1,6 @@
 module.exports = [
     {
-      id: 1,
+      invoiceid: 1,
       clientid: 1,
       issuedate: '2024-03-01',
       duedate: '2024-04-01',
@@ -8,7 +8,7 @@ module.exports = [
       status: 'Pending',
     },
     {
-      id: 2,
+      invoiceid: 2,
       clientid: 2,
       issuedate: '2024-03-02',
       duedate: '2024-04-02',
@@ -16,7 +16,7 @@ module.exports = [
       status: 'Paid',
     },
     {
-      id: 3,
+      invoiceid: 3,
       clientid: 3,
       issuedate: '2024-03-03',
       duedate: '2024-04-03',
@@ -24,7 +24,7 @@ module.exports = [
       status: 'Overdue',
     },
     {
-      id: 4,
+      invoiceid: 4,
       clientid: 4,
       issuedate: '2024-03-04',
       duedate: '2024-04-04',
@@ -32,7 +32,7 @@ module.exports = [
       status: 'Pending',
     },
     {
-      id: 5,
+      invoiceid: 5,
       clientid: 5,
       issuedate: '2024-03-05',
       duedate: '2024-04-05',
