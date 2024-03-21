@@ -35,8 +35,9 @@ exports.up = function (knex) {
         .references("clients.clientid")
         .onUpdate("CASCADE")
         .onDelete("CASCADE"); 
-      table.date("date");
-      table.decimal("hours", 5, 2);
+        table.datetime("starttime");
+        table.datetime("endtime");
+        table.integer("duration");
       table.text("description");
     })
     // create invoices table last - relational id to client as it needs to have client data
