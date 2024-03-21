@@ -5,7 +5,7 @@ module.exports = [
     endtime: '2024-02-01 10:00:00',
     duration: 7200,
     description: 'Project A kickoff meeting',
-    projectid: 1,
+    clientid: 1,
   },
   {
     timerid: 2,
@@ -13,7 +13,7 @@ module.exports = [
     endtime: '2024-02-02 11:45:00',
     duration: 8100,
     description: 'Initial development work on Project B',
-    projectid: 2,
+    clientid: 2,
   },
   {
     timerid: 3,
@@ -21,7 +21,7 @@ module.exports = [
     endtime: '2024-02-03 15:30:00',
     duration: 9000,
     description: 'Design phase for Project C',
-    projectid: 3,
+    clientid: 3,
   },
   {
     timerid: 4,
@@ -29,7 +29,7 @@ module.exports = [
     endtime: '2024-02-04 12:45:00',
     duration: 9000,
     description: 'Client review meeting for Project D',
-    projectid: 4,
+    clientid: 4,
   },
   {
     timerid: 5,
@@ -37,30 +37,6 @@ module.exports = [
     endtime: '2024-02-05 16:00:00',
     duration: 7200,
     description: 'Finalizing deployment for Project E',
-    projectid: 5,
-  },
-  {
-    timerid: 6,
-    starttime: '2024-02-06 09:00:00',
-    endtime: '2024-02-06 11:00:00',
-    duration: 7200,
-    description: 'Continued development on Project B',
-    projectid: 2,
-  },
-  {
-    timerid: 7,
-    starttime: '2024-02-07 10:00:00',
-    endtime: '2024-02-07 12:30:00',
-    duration: 9000,
-    description: 'Backend integration for Project B',
-    projectid: 2,
-  },
-  {
-    timerid: 8,
-    starttime: '2024-02-08 08:30:00',
-    endtime: '2024-02-08 10:45:00',
-    duration: 8100,
-    description: 'Frontend styling adjustments for Project B',
-    projectid: 2,
+    clientid: 4,
   },
 ];
