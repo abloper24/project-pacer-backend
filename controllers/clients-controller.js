@@ -5,7 +5,7 @@ const index = async (_req, res) => {
   try {
     const data = await knex('clients');
     res.status(200).json(data);
-  } catch(err) {
+  } catch (err) {
     res.status(400).send(`Error retrieving Clients: ${err}`)
   }
 };
@@ -17,7 +17,7 @@ const findOne = async (req, res) => {
 
     if (clientsFound.length === 0) {
       return res.status(404).json({
-        message: `Client with ID ${req.params.id} not found` 
+        message: `Client with ID ${req.params.id} not found`
       });
     }
 
@@ -26,20 +26,6 @@ const findOne = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: `Unable to retrieve client data for client with ID ${req.params.id}`,
-    });
-  }
-};
-
-// Function to retrieve invoices related to a specific client
-const invoices = async (req, res) => {
-  try {
-    const invoices = await knex("invoices")
-      .where({ clientid: req.params.id });
-
-    res.json(invoices);
-  } catch (error) {
-    res.status(500).json({
-      message: `Unable to retrieve invoices for client with ID ${req.params.id}: ${error}`,
     });
   }
 };
@@ -76,7 +62,7 @@ const update = async (req, res) => {
 
     if (rowsUpdated === 0) {
       return res.status(404).json({
-        message: `Client with ID ${req.params.id} not found` 
+        message: `Client with ID ${req.params.id} not found`
       });
     }
 
@@ -84,11 +70,11 @@ const update = async (req, res) => {
       .where({
         clientid: req.params.id,
       });
-    
+
     res.json(updatedClient[0]);
   } catch (error) {
     res.status(500).json({
-      message: `Unable to update client with ID ${req.params.id}: ${error}` 
+      message: `Unable to update client with ID ${req.params.id}: ${error}`
     });
   }
 };
@@ -114,11 +100,45 @@ const remove = async (req, res) => {
   }
 };
 
+
+// Function to get invoices related to a specific client
+const invoices = async (req, res) => {
+  try {
+    const invoices = await knex("invoices")
+      .where({ clientid: req.params.id });
+
+    res.json(invoices);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to retrieve invoices for client with ID ${req.params.id}: ${error}`,
+    });
+  }
+};
+
+//get all entries related to one client by id
+const clientEntries = async (req, res) => {
+  try {
+    const entries = await knex('entries')
+      .join('timers', 'entries.timerid', '=', 'timers.timerid')
+      .where('timers.clientid', req.params.id)
+      .select('entries.*');
+
+    res.json(entries);
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to retrieve entries for client with ID ${req.params.id}: ${error}`,
+    });
+  }
+};
+
+
+
 module.exports = {
   index,
   findOne,
-  invoices, 
   add,
   update,
   remove,
+  invoices,
+  clientEntries,
 };

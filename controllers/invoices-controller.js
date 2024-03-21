@@ -1,20 +1,33 @@
 const knex = require('knex')(require('../knexfile'));
+const { format } = require('date-fns');
 
-//find all invoices
+// format dates
+const formatDateTime = (date) => format(new Date(date), 'yyyy-MM-dd HH:mm:ss');
+
+// find all invoices
 const index = async (_req, res) => {
   try {
-    const invoices = await knex('invoices');
+    let invoices = await knex('invoices');
+   
+    invoices = invoices.map(invoice => ({
+      ...invoice,
+      issuedate: invoice.issuedate ? formatDateTime(invoice.issuedate) : null,
+      duedate: invoice.duedate ? formatDateTime(invoice.duedate) : null,
+    }));
     res.status(200).json(invoices);
   } catch (error) {
     res.status(500).json({ message: `Error retrieving invoices: ${error}` });
   }
 };
 
-//find one invoice by id
+// find invoice by id
 const findOne = async (req, res) => {
   try {
-    const invoice = await knex('invoices').where({ invoiceid: req.params.id }).first();
+    let invoice = await knex('invoices').where({ invoiceid: req.params.id }).first();
     if (invoice) {
+      
+      invoice.issuedate = invoice.issuedate ? formatDateTime(invoice.issuedate) : null;
+      invoice.duedate = invoice.duedate ? formatDateTime(invoice.duedate) : null;
       res.json(invoice);
     } else {
       res.status(404).json({ message: `Invoice with ID ${req.params.id} not found` });
@@ -24,23 +37,33 @@ const findOne = async (req, res) => {
   }
 };
 
-//add new invoice
+// add new invoice
 const add = async (req, res) => {
   try {
     const [newInvoiceId] = await knex('invoices').insert(req.body);
-    const newInvoice = await knex('invoices').where({ invoiceid: newInvoiceId }).first();
-    res.status(201).json(newInvoice);
+    let newInvoice = await knex('invoices').where({ invoiceid: newInvoiceId }).first();
+  
+    if (newInvoice) {
+      newInvoice.issuedate = newInvoice.issuedate ? formatDateTime(newInvoice.issuedate) : null;
+      newInvoice.duedate = newInvoice.duedate ? formatDateTime(newInvoice.duedate) : null;
+      res.status(201).json(newInvoice);
+    } else {
+      res.status(404).json({ message: "Invoice not found after creation." });
+    }
   } catch (error) {
     res.status(500).json({ message: `Error creating invoice: ${error}` });
   }
 };
 
-//edit/update invoice by id
+// edit/update invoice 
 const update = async (req, res) => {
   try {
     const rowsUpdated = await knex('invoices').where({ invoiceid: req.params.id }).update(req.body);
     if (rowsUpdated) {
-      const updatedInvoice = await knex('invoices').where({ invoiceid: req.params.id }).first();
+      let updatedInvoice = await knex('invoices').where({ invoiceid: req.params.id }).first();
+      
+      updatedInvoice.issuedate = updatedInvoice.issuedate ? formatDateTime(updatedInvoice.issuedate) : null;
+      updatedInvoice.duedate = updatedInvoice.duedate ? formatDateTime(updatedInvoice.duedate) : null;
       res.json(updatedInvoice);
     } else {
       res.status(404).json({ message: `Invoice with ID ${req.params.id} not found` });
@@ -50,8 +73,7 @@ const update = async (req, res) => {
   }
 };
 
-
-//delete invoice by id
+// delete invoice
 const remove = async (req, res) => {
   try {
     const rowsDeleted = await knex('invoices').where({ invoiceid: req.params.id }).del();
