@@ -1,4 +1,3 @@
-// entries-seeds.js
 module.exports = [
   {
     entryid: 1,

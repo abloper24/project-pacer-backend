@@ -15,7 +15,7 @@ exports.up = function (knex) {
     // create timers table 
     //added client id connection
     .createTable("timers", table => {
-      table.increments("timerid").primary();
+      table.increments("timerid").primary(); //this would be a text parameter 
       table.datetime("starttime");
       table.datetime("endtime");
       table.integer("duration");
