@@ -3,7 +3,7 @@ const entriesController = require("../controllers/entries-controller");
 
 router.route("/")
   .get(entriesController.index) //checked
-  .post(entriesController.add); //
+  .post(entriesController.add); //checked
 
 router.route("/:id")
   .get(entriesController.findOne) //checked

@@ -1,7 +1,6 @@
 module.exports = [
   {
     entryid: 1,
-    timerid: 1,
     clientid: 1,
     date: '2024-02-01',
     hours: 2.0,
@@ -9,7 +8,6 @@ module.exports = [
   },
   {
     entryid: 2,
-    timerid: 2,
     clientid: 2,
     date: '2024-02-02',
     hours: 2.25,
@@ -17,7 +15,6 @@ module.exports = [
   },
   {
     entryid: 3,
-    timerid: 3,
     clientid: 3,
     date: '2024-02-03',
     hours: 2.5,
@@ -25,7 +22,6 @@ module.exports = [
   },
   {
     entryid: 4,
-    timerid: 4,
     clientid: 4,
     date: '2024-02-04',
     hours: 2.0,
@@ -33,13 +29,11 @@ module.exports = [
   },
   {
     entryid: 5,
-    timerid: 5,
     clientid: 5,
     date: '2024-02-05',
     hours: 3.0,
     description: 'Final testing and quality assurance for Project E',
   },
-    // Manual entries for Project C that are not part of the timer
     {
       entryid: 6,
       clientid: 3,

@@ -26,15 +26,10 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE"); 
     })
-    // create entries table - relational id to timer as entries can also be entered manually
+    // create entries table - removed relation to timer id - no need
     //connected to client id as well 
     .createTable("entries", table => {
       table.increments("entryid").primary();
-      table.integer("timerid")
-        .unsigned()
-        .references("timers.timerid")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
       table.integer("clientid") 
         .unsigned()
         .references("clients.clientid")
