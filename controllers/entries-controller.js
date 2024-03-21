@@ -83,27 +83,10 @@ const remove = async (req, res) => {
   }
 };
 
-// get entries by timer ID - not sure if i will be using this one or if it should be the other way around 
-//will comeback when frontend is done
-const findByTimer = async (req, res) => {
-  try {
-    let entries = await knex('entries').where({ timerid: req.params.timerid });
-  
-    entries = entries.map(entry => ({
-      ...entry,
-      date: entry.date ? formatDateTime(entry.date) : null,
-    }));
-    res.json(entries);
-  } catch (error) {
-    res.status(500).json({ message: `Error retrieving entries for timer ID ${req.params.timerid}: ${error}` });
-  }
-};
-
 module.exports = {
   index,
   findOne,
   add,
   update,
   remove,
-  findByTimer,
 };
