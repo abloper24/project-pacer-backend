@@ -26,20 +26,6 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE"); 
     })
-    // create entries table - removed relation to timer id - no need
-    //connected to client id as well 
-    .createTable("entries", table => {
-      table.increments("entryid").primary();
-      table.integer("clientid") 
-        .unsigned()
-        .references("clients.clientid")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE"); 
-        table.datetime("starttime");
-        table.datetime("endtime");
-        table.integer("duration");
-      table.text("description");
-    })
     // create invoices table last - relational id to client as it needs to have client data
     .createTable("invoices", table => {
       table.increments("invoiceid").primary();
@@ -62,7 +48,6 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema
     .dropTable("invoices")
-    .dropTable("entries")
     .dropTable("timers")
     .dropTable("clients");
 };
