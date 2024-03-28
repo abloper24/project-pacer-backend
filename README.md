@@ -4,6 +4,10 @@
 
 **ProjectPacer** is a web-based application crafted specifically for freelancers, aiming to enhance their productivity by providing a way to track time spent on various projects and tasks. The app integrates a timer with start, pause, and stop functionalities, invoicing based on tracked hours, and a motivational quotes feature to inspire users throughout their workday. Additionally, ProjectPacer allows users to add detailed comments to their time entries, ensuring a comprehensive understanding of tasks completed during each tracked period.
 
+### Preview
+
+![](preview.gif)
+
 
 ### Problem
 
@@ -11,7 +15,7 @@ Managing multiple projects and tasks can often lead to inefficiencies and inaccu
 
 ### User Profile
 
-ProjectPacer is designed for individual freelancers who need an efficient tool for managing their time, generating invoices, and seeking motivation. This initial version focuses on single-user functionality, with plans to expand features to support teams or agencies in future updates.
+ProjectPacer is designed for a freelancer who needs an efficient tool for managing their time, generating invoices, and seeking motivation. This initial version focuses on single-user functionality.
 
 ### Features
 
@@ -27,15 +31,21 @@ ProjectPacer is designed for individual freelancers who need an efficient tool f
 
 ## Implementation
 
+###Installation
+- Clone from GitHub the backend: https://github.com/abloper24/project-pacer-backend
+- Set up your database with an .env file 
+- Clone from GitHub the frontend: https://github.com/abloper24/project-pacer
+
+
 ### Tech Stack
 
 - **Frontend:** React.js, SASS, and React Router.
-- **Backend:** Node.js, Express for server-side logic, (For future development: database for data storage).
-- **Libraries:** jsPDF for PDF generation, axios for API requests, (maybe also Redux for easier state management).
+- **Backend:** Node.js, Express for server-side logic, MySQL database for data storage.
+- **Libraries:** jsPDF for PDF generation, axios for API requests.
 
 ### APIs
 
-- ZenQuotes.io - https://zenquotes.io/
+- Quotes on Design - https://quotesondesign.com/api/
 
 ### Sitemap
 
@@ -43,30 +53,56 @@ ProjectPacer is designed for individual freelancers who need an efficient tool f
 - **Time Entries Page:** Allows management and review of all time entries and can select specific time entries to create invoice.
 - **Invoices Page:** Handles the creation, review, and status management of invoices. You can click to download PDF file. 
 
-### Mockups
-
-![](mockup.jpg)
-
 
 ### Data
 
 - **Time Entries:** Enhanced to include start/end times, duration, task-specific comments, and invoicing status.
-- **Invoices:** Detailed with invoice ID, associated time entries, total amount, status, and relevant dates.
+- **Clients:** Detailed with ID, associated time entries.
 
 ### Endpoints
 
-**POST /time-entries/:id**
-- add time entry 
+#### **1. Clients**
 
-**GET /time-entries/:id**
-- get time entry by id
+- **GET `/clients`**: Get all clients.
+- **POST `/clients`**: Add a new client.
+- **GET `/clients/:id`**: Get client by ID.
+- **PATCH `/clients/:id`**: Edit client by ID.
+- **DELETE `/clients/:id`**: Delete client by ID.
+- **GET `/clients/:id/timers`**: Get all entries related to client with ID.
 
-**DELETE /time-entries/:id**
-- delete time entry by id
+```jsx
+{
+        clientid: 1,
+        name: 'Alice Johnson',
+        email: 'alice@example.com',
+        address: '1234 Main St',
+        phone: '604-441-1001',
+    }
+```
+
+#### **2. Timers**
+
+- **GET `/timers`**: Get all timers.
+- **POST `/timers`**: Start a new timer.
+- **GET `/timers/:id`**: Get timer details.
+- **PATCH `/timers/:id`**: Edit timer details.
+- **DELETE `/timers/:id`**: Delete timer details.
+
+```jsx
+{
+    timerid: 1,
+    starttime: '2024-02-01 08:00:00',
+    endtime: '2024-02-01 10:00:00',
+    duration: 7200,
+    description: 'Project A kickoff meeting',
+    clientid: 1,
+  }
+```
+
 
 ### Auth
 
-ProjectPacer will initially support a single user without authentication, with plans to introduce authentication mechanisms in future versions for expanded user functionalities.
+ProjectPacer only supports a single user without authentication.
 
 ## Roadmap
 
@@ -74,19 +110,14 @@ ProjectPacer will initially support a single user without authentication, with p
     - React project with routes and boilerplate pages
 - Create server
     - Express project with routing
-- Feature: Time Tracker (basic requirements: start & pause )
-- Feature: Time entries page & post time entries (backend data storage - now with json file)
+- Create MySQL Database with seed data
+- Feature: Time Tracker (basic requirements: start, pause and reset)
+- Feature: Time entries page & post time entries 
 - Feature: Time Tracker with Comments (ability to add comments to time entry)
 - Feature: Deleting capability 
-- ZenQuotes API Connection
 - Front-End Design of Time Tracker 
 - Feature: Invoicing  
 - Front-End Design of Invoicing
 - Feature: PDF Exporting
 - Bug Fixes
 - Demo Day
-
-## Nice-to-haves
-- **Database Utilization:** For comprehensive data management.
-- **Edit Time Entries, Notes, Invoices Functionality:** To enhance the UX of the app but only if I have extra time to set this up. 
-- **Multi-User Support:** Future versions will include functionalities for team or multiple user environments.
