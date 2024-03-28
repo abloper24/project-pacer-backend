@@ -31,7 +31,7 @@ ProjectPacer is designed for a freelancer who needs an efficient tool for managi
 
 ## Implementation
 
-###Installation
+### Installation
 - Clone from GitHub the backend: https://github.com/abloper24/project-pacer-backend
 - Set up your database with an .env file 
 - Clone from GitHub the frontend: https://github.com/abloper24/project-pacer
