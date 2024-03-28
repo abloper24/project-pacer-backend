@@ -84,10 +84,25 @@ const remove = async (req, res) => {
   }
 };
 
+const markAsInvoiced = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const rowsUpdated = await knex('timers').where({ timerid: id }).update({ invoiced: true });
+    if (rowsUpdated) {
+      res.json({ message: `Timer with ID ${id} marked as invoiced` });
+    } else {
+      res.status(404).json({ message: `Timer with ID ${id} not found` });
+    }
+  } catch (error) {
+    res.status(500).json({ message: `Error updating timer: ${error}` });
+  }
+};
+
 module.exports = {
   index,
   findOne,
   add,
   update,
   remove,
+  markAsInvoiced,
 };

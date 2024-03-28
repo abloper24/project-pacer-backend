@@ -20,25 +20,14 @@ exports.up = function (knex) {
       table.datetime("endtime");
       table.integer("duration");
       table.text("description");
+      table.boolean("invoiced").notNullable().defaultTo(false);
       table.integer("clientid") 
         .unsigned()
         .references("clients.clientid")
         .onUpdate("CASCADE")
         .onDelete("CASCADE"); 
     })
-    // create invoices table last - relational id to client as it needs to have client data
-    .createTable("invoices", table => {
-      table.increments("invoiceid").primary();
-      table.integer("clientid")
-        .unsigned()
-        .references("clients.clientid")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
-      table.date("issuedate");
-      table.date("duedate");
-      table.decimal("totalamount", 10, 2);
-      table.string("status");
-    });
+
 };
 
 /**
@@ -47,7 +36,6 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.schema
-    .dropTable("invoices")
     .dropTable("timers")
     .dropTable("clients");
 };

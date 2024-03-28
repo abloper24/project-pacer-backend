@@ -116,17 +116,16 @@ const invoices = async (req, res) => {
 };
 
 //get all entries related to one client by id
-const clientEntries = async (req, res) => {
+const clientTimers = async (req, res) => {
   try {
-    const entries = await knex('entries')
-      .join('timers', 'entries.timerid', '=', 'timers.timerid')
-      .where('timers.clientid', req.params.id)
-      .select('entries.*');
+    const timers = await knex('timers')
+      .where({ clientid: req.params.id })
+      .select('*'); 
 
-    res.json(entries);
+    res.json(timers);
   } catch (error) {
     res.status(500).json({
-      message: `Unable to retrieve entries for client with ID ${req.params.id}: ${error}`,
+      message: `Unable to retrieve timers for client with ID ${req.params.id}: ${error}`,
     });
   }
 };
@@ -140,5 +139,5 @@ module.exports = {
   update,
   remove,
   invoices,
-  clientEntries,
+  clientTimers,
 };

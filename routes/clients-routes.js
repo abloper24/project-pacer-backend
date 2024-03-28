@@ -12,14 +12,9 @@ router
   .patch(clientController.update) //checked
   .delete(clientController.remove); //checked
 
-// Route to get invoices related to a client
-router
-  .route("/:id/invoices") //checked
-  .get(clientController.invoices);
-
 //router to get all entries related to one client
 router
-  .route("/:id/entries")
-  .get(clientController.clientEntries);
+  .route("/:id/timers")
+  .get(clientController.clientTimers);
 
 module.exports = router;

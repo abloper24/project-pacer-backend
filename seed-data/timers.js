@@ -6,6 +6,7 @@ module.exports = [
     duration: 7200,
     description: 'Project A kickoff meeting',
     clientid: 1,
+    invoiced: true,
   },
   {
     timerid: 2,
@@ -14,6 +15,7 @@ module.exports = [
     duration: 8100,
     description: 'Initial development work on Project B',
     clientid: 2,
+    invoiced: true,
   },
   {
     timerid: 3,
@@ -22,6 +24,7 @@ module.exports = [
     duration: 9000,
     description: 'Design phase for Project C',
     clientid: 3,
+    invoiced: false,
   },
   {
     timerid: 4,
@@ -30,6 +33,7 @@ module.exports = [
     duration: 9000,
     description: 'Client review meeting for Project D',
     clientid: 4,
+    invoiced: false,
   },
   {
     timerid: 5,
@@ -38,5 +42,6 @@ module.exports = [
     duration: 7200,
     description: 'Finalizing deployment for Project E',
     clientid: 4,
+    invoiced: true,
   },
 ];

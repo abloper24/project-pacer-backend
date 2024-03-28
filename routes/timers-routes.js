@@ -12,4 +12,7 @@ router.route("/:id")
   .patch(timerController.update) //checked fixed timerid 9 
   .delete(timerController.remove); //checked deleted timerid11
 
+router.route("/:id/invoiced")
+  .patch(timerController.markAsInvoiced);
+
 module.exports = router;

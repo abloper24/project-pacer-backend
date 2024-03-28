@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 8080;
 // import all routes here
 const clientsRoutes = require('./routes/clients-routes');
 const timersRoutes = require('./routes/timers-routes');
-const invoicesRoutes = require('./routes/invoices-routes');
 
 //make sure to include cors
 app.use(express.json());
@@ -18,7 +17,6 @@ app.use(cors());
 // all routes should go here
 app.use("/clients", clientsRoutes);
 app.use("/timers", timersRoutes);
-app.use("/invoices", invoicesRoutes);
 
 
 app.listen(PORT, () => {
